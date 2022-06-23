@@ -21,11 +21,10 @@ function Cards(props) {
 
   return (
     <div>
-      <div>{cards}</div>
       {cards.map((url) => (
         <button type="button" className="card" onClick={checkCard} onKeyDown={checkCard}>
-          <img src={url} alt={url.substring(url.lastIndexOf('/') + 1)} />
-          {url.substring(url.lastIndexOf('/') + 1)}
+          <img src={url} alt={url.substring(url.lastIndexOf('/') + 1, url.indexOf('.'))} />
+          {url.substring(url.lastIndexOf('/') + 1, url.indexOf('.'))}
         </button>
       ))}
     </div>
@@ -35,7 +34,7 @@ function Cards(props) {
 Cards.propTypes = {
   onSucesss: PropTypes.func,
   onFail: PropTypes.func,
-  cards: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
+  cards: PropTypes.arrayOf(PropTypes.string),
 };
 
 Cards.defaultProps = {
