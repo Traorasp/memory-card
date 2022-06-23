@@ -1,9 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import Cards from './components/Cards';
+import Aqua from './cardImages/Aqua.webp';
+import Chomusuke from './cardImages/Chomusuke.webp';
+import Chris from './cardImages/Chris.webp';
+import Darkness from './cardImages/Darkness.webp';
+import Eris from './cardImages/Eris.webp';
+import Kazuma from './cardImages/Kazuma.webp';
+import Megumin from './cardImages/Megumin.webp';
+import Wiz from './cardImages/Wiz.webp';
 
 function App() {
+  const images = [Aqua, Chomusuke, Chris, Darkness, Eris, Kazuma, Megumin, Wiz];
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [cards, setCards] = useState([]);
+
+  const shuffleCards = () => {
+    const newOrder = images;
+    for (let i = 0; i < images.length; i += 1) {
+      const newPlace = Math.floor(Math.random() * 8);
+      const newPlaceUrl = newOrder[newPlace];
+      newOrder[newPlace] = images[i];
+      newOrder[i] = newPlaceUrl;
+    }
+    setCards(images);
+  };
 
   const increaseScore = () => {
     setScore(score + 1);
@@ -14,9 +35,14 @@ function App() {
   };
 
   useEffect(() => {
+    shuffleCards();
+  }, []);
+
+  useEffect(() => {
     if (score > highScore) {
       setHighScore(score);
     }
+    shuffleCards();
   }, [score]);
 
   return (
@@ -34,7 +60,7 @@ function App() {
           {score}
         </h2>
       </div>
-      <Cards onCardClick={increaseScore} onFail={lostGame} />
+      <Cards onSucesss={increaseScore} onFail={lostGame} cards={cards} />
     </div>
   );
 }
