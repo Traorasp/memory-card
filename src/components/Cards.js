@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Cards(props) {
   const { onSucesss, onFail, cards } = props;
-  const usedCards = [];
+  const [usedCards, setUsedCards] = useState([]);
 
   const checkCard = (e) => {
     let isDuplicate = false;
     usedCards.forEach((card) => {
-      if (card === e.target.textContext) {
+      if (card === e.target.alt) {
         isDuplicate = true;
       }
     });
     if (!isDuplicate) {
       onSucesss();
+      setUsedCards(usedCards.concat(e.target.alt));
     } else {
       onFail();
+      setUsedCards([]);
     }
   };
 
