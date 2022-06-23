@@ -22,7 +22,7 @@ function Cards(props) {
   };
 
   return (
-    <div>
+    <div className="allCards">
       {cards.map((url) => (
         <button type="button" className="card" onClick={checkCard} onKeyDown={checkCard}>
           <img src={url} alt={url.substring(url.lastIndexOf('/') + 1, url.indexOf('.'))} />

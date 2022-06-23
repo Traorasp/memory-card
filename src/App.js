@@ -47,18 +47,20 @@ function App() {
 
   return (
     <div>
-      <h1>Memory Card</h1>
-      <div>
-        <h2>
-          High Score:
-          {' '}
-          {highScore}
-        </h2>
-        <h2>
-          Score:
-          {' '}
-          {score}
-        </h2>
+      <div className="info">
+        <h1>Memory Card</h1>
+        <div className="scores">
+          <h2>
+            High Score:
+            {' '}
+            {highScore}
+          </h2>
+          <h2>
+            Score:
+            {' '}
+            {score}
+          </h2>
+        </div>
       </div>
       <Cards onSucesss={increaseScore} onFail={lostGame} cards={cards} />
     </div>
